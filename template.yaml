@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  getAds:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: getAdsV2
+      Description: API to advertisements for the given metadata
+      Handler: index.handler
+      Runtime: nodejs8.10
+      Timeout: 60
+      CodeUri: ./
+      Role: !GetAtt getAdsFnRole.Arn
+      Layers:
+        - arn:aws:lambda:us-east-1:891956057524:layer:s3-dependencies:2
+      Environment:
+        Variables:
+          GET_METADATA_HOST: '{{resolve:ssm:GET_METADATA_HOST:1}'
+          IDEALFEEDS_KEY: '{{resolve:ssm:IDEALFEEDS_KEY:1}}'
+      Events:
+        photos:
+          Type: Api
+          Properties:
+            Path: /ads
+            RequestParameters:
+              - method.request.querystring.fileName:
+                  Required: true
+            Method: get
+            RestApiId: !Ref adsApi
+  adsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: adsV2
+      StageName: prod
+      Cors:
+        AllowOrigin: "'*'"
+  getAdsFnRole:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      AssumeRolePolicyDocument: 
+        Version: '2012-10-17'
+        Statement: 
+          - Effect: Allow
+            Principal:
+              Service:
+              - 'lambda.amazonaws.com'
+            Action: 
+              - 'sts:AssumeRole'

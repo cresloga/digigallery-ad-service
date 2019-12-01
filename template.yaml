@@ -7,7 +7,7 @@ Resources:
       FunctionName: getAdsV2
       Description: API to advertisements for the given metadata
       Handler: index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 60
       CodeUri: ./
       Role: !GetAtt getAdsFnRole.Arn

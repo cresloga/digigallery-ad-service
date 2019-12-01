@@ -6,7 +6,7 @@ env:
 phases:
   install:
     runtime-versions:
-        nodejs: 8
+        nodejs: 12
   build:
     commands:
       - rm -f package-lock.json

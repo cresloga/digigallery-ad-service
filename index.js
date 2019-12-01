@@ -13,9 +13,8 @@ exports.handler = function(event, context,callback) {
             console.error(JSON.stringify(error));
             return new Error(`Error adding metadata: ${JSON.stringify(error)}`);
           } else {
-            console.log("Response from getMetadata : "+JSON.stringify(response));
-            var metadata = response.Payload;
-            generateDigiAds(metadata,callback);
+            console.log("Response from getMetadata : "+body);            
+            generateDigiAds(body,callback);
           	
         }
     });

@@ -6,15 +6,15 @@ exports.handler = function(event, context,callback) {
 	var fileName = 	event.queryStringParameters.fileName;
 	console.log("File Name :"+fileName);
 
-    var requestUrl = process.env.GET_METADATA_HOST+"/"+fileName;
+    var requestUrl = process.env.GET_METADATA_HOST+"/metadata/"+fileName;
 	console.log(requestUrl);
 	request(requestUrl, function (error, response, body) {
         if (error) {
             console.error(JSON.stringify(error));
             return new Error(`Error adding metadata: ${JSON.stringify(error)}`);
           } else {
-            console.log("Response from getMetadata : "+response);
-            var metadata = JSON.parse(response.Payload);
+            console.log("Response from getMetadata : "+JSON.stringify(response));
+            var metadata = response.Payload;
             generateDigiAds(metadata,callback);
           	
         }

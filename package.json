@@ -4,7 +4,8 @@
     "author": "Loganathan Murugesan",
     "license": "ISC",
     "dependencies": {    
-      "request": "^2.83.0"
+      "request": "^2.83.0",
+      "time": "^0.12.0"
     }
   }
   

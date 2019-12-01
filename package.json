@@ -1,12 +1,6 @@
 {
-    "name": "digiads",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node index.js"
-    },
+    "name": "getAds",
+    "version": "1.0.1",
     "author": "Loganathan Murugesan",
     "license": "ISC",
     "dependencies": {    

@@ -22,6 +22,7 @@ exports.handler = function(event, context,callback) {
 
 function generateDigiAds(metadata,callback){
 	console.log("generating Digi Ads");	
+    metadata = JSON.parse(metadata);
 	console.log(metadata);
 	for(var i=0;i<metadata.Item.labels.length;i++){		
 		console.log(metadata.Item.labels[i].Name);

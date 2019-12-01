@@ -9,6 +9,7 @@ phases:
         nodejs: 8
   build:
     commands:
+      - rm -f package-lock.json
       - npm install time
       - export BUCKET=$DIGIGALLERY_BUILD_BUCKET_NAME
       - aws cloudformation package --template-file template.yaml --output-template-file outputtemplate.yaml --s3-bucket $BUCKET --s3-prefix digigallery-metadata

@@ -1,7 +1,6 @@
 var request = require('request');
 
 exports.handler = function(event, context,callback) {
-
     console.log("get Digi Ads");	
 	var adsPossible = false;
 	var fileName = 	event.queryStringParameters.fileName;
@@ -14,10 +13,10 @@ exports.handler = function(event, context,callback) {
             console.error(JSON.stringify(error));
             return new Error(`Error adding metadata: ${JSON.stringify(error)}`);
           } else {
-          	if(response.StatusCode == 200){
-          		var metadata = JSON.parse(response.Payload);
-          		generateDigiAds(metadata,callback);
-          	}            
+            console.log("Response from getMetadata : "+response);
+            var metadata = JSON.parse(response.Payload);
+            generateDigiAds(metadata,callback);
+          	
         }
     });
 }
@@ -94,10 +93,8 @@ function generateDigiAds(metadata,callback){
 }
 
 function findDeals(adIntro,queryParam,label,pageNo,callback){
-	
 	var responseMsg="";
 	var merchantLogoURL="";
-
 	var ideadFeedsKey = process.env.IDEALFEEDS_KEY || "4b49c92e60487fa073802917cb0b9fb1";
 
 	var requestUrl = "http://api.idealfeeds.com/"+ideadFeedsKey+"/GetDeals/Json?"+queryParam+"="+label+"&SortBy=ENDDATE&PageNo="+pageNo+"&PageSize=1";

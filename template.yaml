@@ -52,7 +52,7 @@ Resources:
               - 'lambda.amazonaws.com'
             Action: 
               - 'sts:AssumeRole'
-     Policies:
+      Policies:
       - PolicyName: demo-xray-lambda-policy
         PolicyDocument:
           Version: "2012-10-17"

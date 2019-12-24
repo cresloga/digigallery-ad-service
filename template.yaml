@@ -14,6 +14,7 @@ Resources:
       Tracing: Active
       Layers:
         - arn:aws:lambda:us-east-1:891956057524:layer:s3-dependencies:2
+        - !Ref xrayWriteRole
       Environment:
         Variables:
           GET_METADATA_HOST: '{{resolve:ssm:GET_METADATA_HOST:1}}'
@@ -28,6 +29,8 @@ Resources:
                   Required: true
             Method: get
             RestApiId: !Ref adsApi
+      DependsOn:
+      - xrayWriteRole
   adsApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -50,3 +53,23 @@ Resources:
               - 'lambda.amazonaws.com'
             Action: 
               - 'sts:AssumeRole'
+  xrayWriteRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+      - Action: "sts:AssumeRole"
+        Principal:
+          Service: lambda.amazonaws.com
+        Effect: Allow
+      Policies:
+        PolicyName: demo-xray-lambda-policy
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+          - Action:
+            - "xray:PutTraceSegments"
+            - "xray:PutTelemetryRecords"
+            Effect: Allow
+            Resource: "*"

@@ -11,6 +11,8 @@ Resources:
       Timeout: 60
       CodeUri: ./
       Role: !GetAtt getAdsFnRole.Arn
+      TracingEnabled: true
+      Tracing: Active
       Layers:
         - arn:aws:lambda:us-east-1:891956057524:layer:s3-dependencies:2
       Environment:
@@ -32,6 +34,8 @@ Resources:
     Properties:
       Name: adsV2
       StageName: prod
+      TracingEnabled: true
+      Tracing: Active
       Cors:
         AllowOrigin: "'*'"
   getAdsFnRole:

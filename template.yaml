@@ -29,7 +29,7 @@ Resources:
             Method: get
             RestApiId: !Ref adsApi
     DependsOn:
-    - xrayWriteRole
+    - getAdsFnRoleV2
   adsApi:
     Type: AWS::Serverless::Api
     Properties:

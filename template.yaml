@@ -64,7 +64,7 @@ Resources:
             Service: lambda.amazonaws.com
           Effect: Allow
       Policies:
-        PolicyName: demo-xray-lambda-policy
+      - PolicyName: demo-xray-lambda-policy
         PolicyDocument:
           Version: "2012-10-17"
           Statement:

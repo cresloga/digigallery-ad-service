@@ -53,7 +53,7 @@ Resources:
             Action: 
               - 'sts:AssumeRole'
       Policies:
-      - PolicyName: demo-xray-lambda-policy
+      - PolicyName: digigallery-xray-lambda-policy
         PolicyDocument:
           Version: "2012-10-17"
           Statement:

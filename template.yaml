@@ -63,7 +63,7 @@ Resources:
               produces:
               - "application/json"
               responses:
-                200:
+                "200":
                   description: "200 response"
                   headers:
                     Access-Control-Allow-Origin:

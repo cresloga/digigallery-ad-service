@@ -57,24 +57,12 @@ Resources:
                 required: true
                 type: "string"
               responses: {}
-            options:
-              consumes:
-              - "application/json"
-              produces:
-              - "application/json"
-              responses:
-                "200":
-                  description: "200 response"
-                  headers:
-                    Access-Control-Allow-Origin:
-                      type: "string"
-                    Access-Control-Allow-Methods:
-                      type: "string"
               x-amazon-apigateway-integration:
                 httpMethod: post
                 type: aws_proxy
                 uri:
                   Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${getAds.Arn}/invocations
+              
   getAdsFnRoleV2:
     Type: AWS::IAM::Role
     Properties:

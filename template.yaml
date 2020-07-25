@@ -38,6 +38,38 @@ Resources:
       TracingEnabled: true
       Cors:
         AllowOrigin: "'*'"
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+      DefinitionBody:
+        swagger: "2.0"
+        info:
+          version: "1.0"
+          title: "adsV2"        
+        basePath: "/prod"
+        schemes:
+        - "https"
+        paths:
+          /ads:
+            get:
+              parameters:
+              - name: "fileName"
+                in: "query"
+                required: true
+                type: "string"
+              responses: {}
+            options:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              responses:
+                200:
+                  description: "200 response"
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: "string"
+                    Access-Control-Allow-Methods:
+                      type: "string"
   getAdsFnRoleV2:
     Type: AWS::IAM::Role
     Properties:

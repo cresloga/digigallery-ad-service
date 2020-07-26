@@ -8,6 +8,10 @@ AWS.config.update({
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
+var responseBody = {};  
+var responseStatus = 200;
+var responseContentType = "application/json";
+
 
 exports.handler = function(event, context,callback) {
     console.log("Request Received : "+JSON.stringify(event));
@@ -21,9 +25,7 @@ exports.handler = function(event, context,callback) {
         }
     };
 
-    var responseBody = {};  
-	var responseStatus = 200;
-    var responseContentType = "application/json";
+    
     
     docClient.get(params, function(err, data) {
         if (err) {
@@ -45,9 +47,7 @@ exports.handler = function(event, context,callback) {
 
 
 function findDeals(data, callback){
-
-	var responseBody = {};  
-	var responseStatus = 200;
+	
 	var categoryId = data.Item.category[0].id;	
 	var requestUrl = "https://amazon-deals.p.rapidapi.com/amazon-offers/category/"+categoryId;
 

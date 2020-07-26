@@ -16,8 +16,10 @@ Resources:
         - arn:aws:lambda:us-east-1:891956057524:layer:s3-dependencies:2
       Environment:
         Variables:
-          GET_METADATA_HOST: '{{resolve:ssm:GET_METADATA_HOST:1}}'
-          IDEALFEEDS_KEY: '{{resolve:ssm:IDEALFEEDS_KEY:1}}'
+          DB_REGION: '{{resolve:ssm:DIGIGALLERY_DYNAMO_DB_REGION:1}}'
+          DB_ENDPOINT: '{{resolve:ssm:DIGIGALLERY_DYNAMO_DB_ENDPOINT:1}}'
+          DB_TABLE_NAME: '{{resolve:ssm:DIGIGALLERY_CATEGORY_DYNAMO_DB_TABLE:1}}'
+          ADS_API_KEY: '{{resolve:ssm:ADS_API_KEY:1}}'
       Events:
         photos:
           Type: Api
@@ -67,6 +69,7 @@ Resources:
     Type: AWS::IAM::Role
     Properties:
       ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       AssumeRolePolicyDocument: 
         Version: '2012-10-17'

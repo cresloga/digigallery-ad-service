@@ -32,8 +32,11 @@ exports.handler = function(event, context,callback) {
 			respond(responseStatus, responseContentType, responseBody, callback);
         } else {
             console.log("Read item:", JSON.stringify(data, null, 2));
-            responseBody = data;  
-			findDeals(data, callback);          
+            responseBody = data;
+			if(data.Item.category.length>0)  
+				findDeals(data, callback);
+			else
+				respond(404, responseContentType, responseBody, callback);          
         }
         
     });
@@ -44,7 +47,7 @@ function findDeals(data, callback){
 
 	var responseBody = {};  
 	var responseStatus = 200;
-	var categoryId = data.category[0].id;	
+	var categoryId = data.Item.category[0].id;	
 	var requestUrl = "https://amazon-deals.p.rapidapi.com/amazon-offers/category/"+categoryId;
 
 	var headerData = {

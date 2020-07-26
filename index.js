@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+var request = require('request');
 
 AWS.config.update({
   region: process.env.DB_REGION,

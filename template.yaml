@@ -38,6 +38,10 @@ Resources:
       Name: adsV2
       StageName: prod
       TracingEnabled: true
+      MethodSettings:
+      - LoggingLevel: info
+        ResourcePath: '/*'
+        HttpMethod: '*'
       Cors:
         AllowOrigin: "'*'"
         AllowMethods: "'*'"
